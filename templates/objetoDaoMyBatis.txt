@@ -1,0 +1,30 @@
+
+@Repository
+class {{_object}}DaoMyBatis implments {{_object}}Dao {
+    
+    private SqlSession session;
+
+    public {{_object}}DaoMyBatis(SqlSession session){
+        this.session = session;
+    }
+    void {{_object}} gravar({{_object}} objeto){
+        this.session.insert("{{namespace}}.insert", objeto);
+    }
+
+   List<{{_object}}recuperarTodos (){
+       return  this.session.select("{{namespace}}.select");
+   }
+
+   {{_object}} recuperarPorId (Long id){
+     return  this.session.select("{{namespace}}.select_porId", id);
+   }
+
+   void excluirPorId(Long id){
+        return  this.session.delete("{{namespace}}.delete_porId", id);
+   }
+
+   void {{_object}} reescrever({{_object}} objeto){
+      return this.session.insert("{{namespace}}.update", objeto);
+   }
+
+}

@@ -1,0 +1,13 @@
+interface {{_object}}Dao {
+   void gravar({{_object}} objeto);
+
+   List<{{_object}}recuperarTodos ();
+
+   {{_object}} recuperarPorId (Long id);
+
+   {{_object}} excluirPorId(Long id);
+
+   {{_object}} reescrever({{_object}} objeto);
+
+
+}

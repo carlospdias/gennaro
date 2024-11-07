@@ -1,0 +1,40 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="{{namespace}}">
+   <select id="insert" resultType="{{_object}}">
+      INSERT INTO {{table}}(
+      {% for person in persons -%}
+       {{person.column_name}},
+      {% endfor %}
+      }
+      values(
+      {% for person in persons -%}
+      {{person.java_name}},
+      {% endfor %})
+   </select>
+
+    <select id="select" resultType="{{_object}}">
+        SELECT  {% for person in persons -%}
+            {{person.column_name}},
+           {% endfor %}
+         FROM {{table}}
+    </select>
+
+    <select id="select_porId" resultType="id">
+        SELECT  {% for person in persons -%}
+            {{person.column_name}},
+           {% endfor %}
+         FROM {{table}} WHERE ID=#{id}
+    </select>
+
+    <insert id="delete_porId">
+        DELETE FROM  {{table}} WHERE ID=#{id}
+    </insert>
+
+    <insert id="update">
+        UPDATE {{table}} SET {% for person in persons -%}
+            {{person.column_name}}={{person.java_name}},
+         WHERE ID=#{id}
+    </insert>
+</mapper>
+
+  

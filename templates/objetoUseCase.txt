@@ -1,0 +1,32 @@
+
+@Service
+public class {{_object}}UseCase {
+    
+    private {{_object}} objetoDao;
+
+    public {{_object}}UseCase({{_object}}Dao objetoDao){
+        this.objetoDao = objetoDao;
+    }
+    @Transaction
+    void {{_object}} gravar({{_object}} objeto){
+        this.session.insert("{{namespace}}.insert", objeto);
+    }
+   
+   @Transaction
+   List<{{_object}}buscarTodos{{plural_object}} (){
+       return  this.session.select("{{namespace}}.select");
+   }
+      @Transaction
+   {{_object}} recuperarPorId (Long id){
+     return  this.session.select("{{namespace}}.select_porId", id);
+   }
+      @Transaction
+   void excluirPorId(Long id){
+        return  this.session.delete("{{namespace}}.delete_porId", id);
+   }
+      @Transaction
+   void {{_object}} reescrever({{_object}} objeto){
+      return this.session.insert("{{namespace}}.update", objeto);
+   }
+
+}

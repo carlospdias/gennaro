@@ -1,0 +1,22 @@
+{
+    "mapper":{
+        "name":"APRESENTACAO",
+        "request_root":"/pessoa",
+        "namespace":"br.jus.tse.organograma",
+        "table":"PS",
+        "object_root":"Pessoa",
+        "negocio":"pessoa",
+        "plural_object": "pessoas",
+        "attributes":[
+            {"java_name":"nome", "label":"Nome", "html_type":"text", "column_name":"CD_MEDICAMENTO", "java_type":"String", "db_type":"VARCHAR(60)"},
+            {"java_name":"nome", "label":"Nome", "html_type":"text", "column_name":"NUM", "java_type":"String", "db_type":"VARCHAR(60)"},
+            {"java_name":"nome", "label":"Nome", "html_type":"text", "column_name":"NUM", "java_type":"String", "db_type":"VARCHAR(60)"},
+            {"java_name":"nome", "label":"Nome", "html_type":"text", "column_name":"NUM", "java_type":"String", "db_type":"VARCHAR(60)"},
+            {"java_name":"nome", "label":"Nome", "html_type":"text", "column_name":"NUM", "java_type":"String", "db_type":"VARCHAR(60)"},
+            {"java_name":"nome", "label":"Nome", "html_type":"date", "column_name":"NUM", "java_type":"String", "db_type":"VARCHAR(60)"}
+     
+        ]
+        
+    }
+
+}

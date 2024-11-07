@@ -1,0 +1,44 @@
+
+class {{_object}}Request{
+    {% for person in persons -%}
+    private {{person.java_type}} {{person.java_name}};
+    {% endfor %}
+
+    {% for person in persons -%}
+     private get{{person.java_name}}(){
+        return {{person.java_name}}
+     };
+    {% endfor %}
+
+    {% for person in persons -%}
+     private set{{person.java_name}}({{person.java_name}}){
+        this.{{person.java_name}} = person.java_name;
+     };
+    {% endfor %}
+
+   public {{_object}} transform(Pessoa){
+        //Endereco objEndereco = new Endereco(  this.idEndereco,  this.cep,  this.logradouro,  this.complemento,    pessoafisica);
+        //return objEndereco;
+    }
+
+     public Set< String >isValidOnStage (Class<?> stage) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+
+        Set< ConstraintViolation< EnderecoRequest >>violacoes = validator.validate(this, stage);
+
+        if (violacoes.isEmpty()) {
+            return Collections.emptySet();
+        }
+
+        Set< String > violations = new HashSet<>() ;
+        violacoes.forEach((violacao)->{
+            violations.add(violacao.getMessageTemplate());
+        });
+
+        return violations;
+    }
+
+
+}

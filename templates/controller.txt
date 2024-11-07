@@ -1,0 +1,86 @@
+
+
+{% set request_object_name =  atributos.object_root.split() | first | lower  %}
+{% set use_case = request_object_name + 'UseCase' %}
+@Controller
+@RequestMapping("{{atributos.request_root}}")
+public class {{atributos.object_root}}Controller{
+
+    private {{atributos.object_root}}UseCase {{use_case}};
+
+    public {{atributos.object_root}}Controller({{atributos.object_root}}UseCase {{request_object_name}}UseCase){
+        this.{{request_object_name}}UseCase = {{use_case}};
+    }
+
+    @GetMapping("/form")
+    public ModelAndView exibirForm(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("{{atributos.negocio}}/form");
+        return mv;
+    }
+    
+    @GetMapping("/list")
+    public ModelAndView {{atributos.plural_object}}(){
+        ModelAndView mv = new ModelAndView();
+        mv.setObject("{{atributos.plural_object}}", {{request_object_name}}UseCase.buscar{{atributos.plural_object| capitalize}}());
+        mv.setViewName("{{atributos.negocio}}/list");
+
+        return mv;
+    }
+
+    @PostMapping("/{{atributos.negocio}}")
+    public void {{atributos.object_root}} gravar(@RequestBody {{atributos.object_root}}Request {{request_object_name}}Request){
+        Set< String > validations = request.isValidOnStage(ValidOnUpdate.class);
+        if (!validations.isEmpty()) {
+            //Retorna erro.
+        }
+
+        {{atributos.object_root}} {{atributos.object_root.split()| first| lower()}} = {{request_object_name}}Request.transforma();
+        {{request_object_name}}UseCase.salvar({{atributos.object_root.split()| first| lower()}});
+
+        // tenta gravar
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/{{atributos.negocio}}/" + {{atributos.object_root.split()| first| lower()}}.id);
+        return mv;
+    }
+   
+   @GetMapping("/{{atributos.negocio}}/id")
+   public ModelAndView recuperarPorId (@RequestParam("id") Long id){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/{{negocio}}/card");
+        mv.setObject("{{plural_object}}", useCase.buscar{{plural_object}}());
+
+        return mv;
+   }
+
+    @GetMapping("/{{atributos.negocio}}/todos")
+   public List<{{_object}}recuperarTodos (){
+       ModelAndView mv = new ModelAndView();
+       mv.setObject("{{plural_object}}", {{use_case}}.buscar{{plural_object}}());
+
+        mv.setViewName(/{{atributos.negocio}}/list");
+        
+        return mv;
+   }
+
+  
+
+    @PostMapping("/{{negocio}}")
+   public void excluirPorId(Long id){
+       ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/{{negocio}}/list");
+        mv.setObject("{{plural_object}}", useCase.buscar{{plural_object}}());
+
+        return mv;
+   }
+    @PostMapping("/{{negocio}}/update")
+   public void {{_object}} reescrever({{_object}} objeto){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/{{negocio}}/list");
+        mv.setObject("{{plural_object}}", useCase.buscar{{plural_object}}());
+
+        return mv;
+   }
+    
+}

@@ -1,0 +1,9 @@
+  <form>
+    {% for person in persons -%}
+      <div>
+       <label for="{{ person.java_name }}">{{person.label}}</label>
+       <input type="{{ person.html_type }}" name="{{ person.java_name }}" />
+    </div>
+    {% endfor %}
+    <button>Submit</button>
+  </form>
