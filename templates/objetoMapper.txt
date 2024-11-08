@@ -1,40 +1,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="{{namespace}}">
-   <select id="insert" resultType="{{_object}}">
-      INSERT INTO {{table}}(
-      {% for person in persons -%}
-       {{person.column_name}},
-      {% endfor %}
-      }
-      values(
-      {% for person in persons -%}
-      {{person.java_name}},
-      {% endfor %})
+<mapper namespace="{{objeto.pacote}}.{{objeto.objeto_raiz}}">
+   
+   <resultMap id="{{objeto.objeto_raiz}}ResultMap" type="{{objeto.objeto_raiz}}">
+      <id property="id" column="user_id" />
+       {% for atributo in objeto.atributos -%}
+          <result property="{{atributo.campo}}" java_type="{{atributo.tipo_java}}" column="{{atributo.coluna_bd}}" java_type="{{atributo.tipo_bd}}" />
+       {% endfor -%}
+    </resultMap>
+
+   <select id="insert" resultType="{{objeto.objeto_raiz}}ResultMap">
+      INSERT INTO {{table}}({% for atributo in objeto.atributos -%}{{atributo.coluna_bd}}, {%- endfor %})     
+      VALUES({% for atributo in objeto.atributos -%} #{ {{- atributo.campo -}} }, {%- endfor %})
    </select>
 
-    <select id="select" resultType="{{_object}}">
-        SELECT  {% for person in persons -%}
-            {{person.column_name}},
-           {% endfor %}
-         FROM {{table}}
+
+   <select id="select" resultType="{{objeto.objeto_raiz}}ResultMap">
+        SELECT {% for atributo in objeto.atributos -%}{{atributo.coluna_bd}}, {%- endfor %} FROM {{objeto.table}}
+         WHERE  ID=#{ {{- objeto.objeto_raiz -}}.id}
     </select>
 
-    <select id="select_porId" resultType="id">
-        SELECT  {% for person in persons -%}
-            {{person.column_name}},
-           {% endfor %}
-         FROM {{table}} WHERE ID=#{id}
+     <select id="select_all" resultType="{{objeto.objeto_raiz}}ResultMap">
+        SELECT {% for atributo in objeto.atributos -%}{{atributo.coluna_bd}}, {%- endfor %} FROM {{objeto.table}}
     </select>
 
-    <insert id="delete_porId">
-        DELETE FROM  {{table}} WHERE ID=#{id}
-    </insert>
+    <select id="update" resultType="{{objeto.objeto_raiz}}ResultMap">
+      UPDATE {{objeto.table}} SET ({% for atributo in objeto.atributos -%}{{atributo.coluna_bd}} = #{ {{- atributo.campo -}} },  {%- endfor -%})     
+      WHERE  ID=#{ {{- objeto.objeto_raiz -}}.id}
+   </select>
 
-    <insert id="update">
-        UPDATE {{table}} SET {% for person in persons -%}
-            {{person.column_name}}={{person.java_name}},
-         WHERE ID=#{id}
-    </insert>
+    <select id="delete">
+      DELETE FROM  {{objeto.table}} WHERE  ID=#{ {{- objeto.objeto_raiz -}}.id}
+   </select>
 </mapper>
 
   

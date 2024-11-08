@@ -1,9 +1,10 @@
 import json
 from jinja2 import FileSystemLoader
 
-from generate_code.gen_controller import GenController;
-from generate_code.gen_form_html  import GenFormHtml;    
-from generate_code.gen_dao        import GenDao;
+from generate_code.gen_controller import GenController
+from generate_code.gen_form_html  import GenFormHtml
+from generate_code.gen_dao        import GenDao
+from generate_code.gen_mybatis    import GenMyBatis
 
 def gen_all():
     with open('modelo.json', mode='r', buffering=1024, encoding="UTF-8" ) as jr:
@@ -21,7 +22,9 @@ if __name__ == '__main__':
     #gen_controller = GenController(json_data_seed)
     #gen_controller.prepare_controller()
     
-    gen_dao  = GenDao(json_data_seed)
-    gen_dao.prepare_daos() 
-            
+    #gen_dao  = GenDao(json_data_seed)
+    #gen_dao.prepare_daos() 
+    gen_mybatis = GenMyBatis(json_data_seed)
+    gen_mybatis.prepare_mappers()
+    
     
