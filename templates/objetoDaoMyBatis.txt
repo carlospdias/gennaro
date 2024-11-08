@@ -1,30 +1,31 @@
 
 @Repository
-class {{_object}}DaoMyBatis implments {{_object}}Dao {
-    
-    private SqlSession session;
+class {{objeto.objeto_raiz}}DaoMyBatis  implments {{objeto.objeto_raiz}}Dao {
+   private SqlSession session;
 
-    public {{_object}}DaoMyBatis(SqlSession session){
+    public {{objeto.objeto_raiz}}DaoMyBatis(SqlSession session){
         this.session = session;
     }
-    void {{_object}} gravar({{_object}} objeto){
-        this.session.insert("{{namespace}}.insert", objeto);
-    }
 
-   List<{{_object}}recuperarTodos (){
-       return  this.session.select("{{namespace}}.select");
+
+   void gravar({{objeto.objeto_raiz}} {{objeto.objeto_raiz| lower()}}){
+      this.session.insert("{{objeto.pacote}}.insert", {{objeto.objeto_raiz| lower()}});
    }
 
-   {{_object}} recuperarPorId (Long id){
-     return  this.session.select("{{namespace}}.select_porId", id);
+   List<{{objeto.objeto_raiz}}>recuperarTodos (){
+    this.session.select("{{objeto.pacote}}.select_all", {{objeto.objeto_raiz| lower()}});
+   }
+
+   {{objeto.objeto_raiz}} recuperarPorId (Long id){
+    this.session.insert("{{objeto.pacote}}.select_byId", {{objeto.objeto_raiz| lower()}});
    }
 
    void excluirPorId(Long id){
-        return  this.session.delete("{{namespace}}.delete_porId", id);
+    this.session.delete("{{objeto.pacote}}.delete", {{objeto.objeto_raiz| lower()}});
    }
 
-   void {{_object}} reescrever({{_object}} objeto){
-      return this.session.insert("{{namespace}}.update", objeto);
+   {{objeto.objeto_raiz}} reescrever({{objeto.objeto_raiz}} {{objeto.objeto_raiz| lower()}}){
+    this.session.update("{{objeto.pacote}}.update", {{objeto.objeto_raiz| lower()}});
    }
-
 }
+

@@ -1,0 +1,31 @@
+
+class {{request_class}}Request{
+  {% for field in fields -%}
+    private {{field.java_type}} {{field.name}};
+  {% endfor %}
+
+  {% for field in fields -%}
+  public void set{{field.name | capitalize}}({{field.java_type}} {{field.name}}){
+    this.{{field.name}} = {{field.name}};
+  }
+  public {{field.java_type}} get{{field.name | capitalize}}(){
+    return this.{{field.name}};
+  }
+  {% endfor %}
+
+
+   public Set< String >isValidOnStage (Class<?> stage) {
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    Validator validator = factory.getValidator();
+
+    Set< ConstraintViolation< {{request_class}} >>violacoes = validator.validate(this, stage);
+    if (violacoes.isEmpty()) {
+      return Collections.emptySet();
+    }
+    Set< String > violations = new HashSet<>() ;
+    violacoes.forEach((violacao)->{
+      violations.add(violacao.getMessageTemplate());
+    });
+    return violations;
+  }
+}

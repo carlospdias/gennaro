@@ -1,0 +1,10 @@
+  <form>
+    {% for tag in tags -%}
+      <div class="form-field">
+       <label class="form-label" for="{{ tag.name }}">{{tag.label}}</label>
+       <input class="form-input" type="{{ tag.type }}" name="{{ tag.name }}" placeholder="{{tag.placeholder}}" hint="{{tag.hint}}" />
+       <span>{{tag.hint}}</span>
+    </div>
+    {% endfor %}
+    <button>Submit</button>
+  </form>

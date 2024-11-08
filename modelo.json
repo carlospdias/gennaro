@@ -1,0 +1,39 @@
+{
+    "modelos":{
+        "name":"apresentacao",
+        "requisicao_raiz":"/pessoa",
+        "form_class":"AboneRequest",
+        "form_controller":[
+            {"name":"nomec",  "label":"Nome",  "type":"text", "placeholder":"sdfadf", "mensagem_erro":"dfd", "hint":"x", "java_type":"String"},
+            {"name":"nomea",  "label":"Nome",  "type":"text", "placeholder":"sdfadf", "mensagem_erro":"dfd", "hint":"c", "java_type":"String"},
+            {"name":"nomecb", "label":"Nome",  "type":"text", "placeholder":"sdfadf", "mensagem_erro":"dfd", "hint":"a", "java_type":"String"},
+            {"name":"nomecd", "label":"Nome",  "type":"text", "placeholder":"sdfadf", "mensagem_erro":"dfd", "hint":"b", "java_type":"String"},
+            {"name":"nomeas", "label":"Nome",  "type":"text", "placeholder":"sdfadf", "mensagem_erro":"dfd", "hint":"cdd", "java_type":"String"}
+
+        ],
+        "conversor":[
+            {"origem":"nome", "destino":"nome"},
+            {"origem":"nome", "destino":"nome"},
+            {"origem":"nome", "destino":"nome"}
+        ],
+        "java":[{ 
+            "pacote":"br.jus.tse.organograma",
+            "table":"NEMESIS",
+            "link": "None",
+            "objeto_raiz":"Pessoa",
+            "plural": "pessoas",
+            "atributos":[
+                {"campo":"nome",   "coluna_bd":"CD_MEDICAMENTO", "tipo_java":"String",     "tipo_bd":"VARCHAR(60)"},
+                {"campo":"nome",   "coluna_bd":"NUM",             "tipo_java":"String",    "tipo_bd":"VARCHAR(60)"},
+                {"campo":"nome",   "coluna_bd":"NUM",             "tipo_java":"String",    "tipo_bd":"VARCHAR(60)"},
+                {"campo":"nome",   "coluna_bd":"NUM",             "tipo_java":"String",    "tipo_bd":"VARCHAR(60)"},
+                {"campo":"nome",   "coluna_bd":"NUM",             "tipo_java":"String",    "tipo_bd":"VARCHAR(60)"},
+                {"campo":"nome",   "coluna_bd":"NUM",             "tipo_java":"LocalDate", "tipo_bd":"VARCHAR(60)"}
+        
+            ]
+        }
+       ]
+        
+    }
+
+}
